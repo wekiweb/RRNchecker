@@ -1,0 +1,74 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+	<title>RRN(Registered Residence Number) Checker</title>
+	<meta name="author" content="Cartes" />
+	<meta name="reply-to" content="mail@cartes9.com" />
+	<meta name="date" content="2013-08-13" />
+
+<style type="text/css">
+/*<![CDATA[*/
+input { font-size: 13px; }
+#RRN { vertical-align: middle; }
+#RRN_A { width: 3.5em; line-height: 20px; }
+#RRN_B { width: 7.0em; line-height: 20px; }
+#RRN_dash { line-height: 20px; }
+/*]]>*/
+</style>
+<script type="text/javascript">
+//<![CDATA[
+function validateRRN()
+{
+	var summ = 0;
+	var RRN_A = document.getElementById("RRN_A").value;
+	var RRN_B = document.getElementById("RRN_B").value;
+
+	var RRN_str = RRN_A+RRN_B;
+	summ = parseInt(RRN_str[0])*2;
+	summ+= parseInt(RRN_str[1])*3;
+	summ+= parseInt(RRN_str[2])*4;
+	summ+= parseInt(RRN_str[3])*5;
+	summ+= parseInt(RRN_str[4])*6;
+	summ+= parseInt(RRN_str[5])*7;
+	summ+= parseInt(RRN_str[6])*8;
+	summ+= parseInt(RRN_str[7])*9;
+	summ+= parseInt(RRN_str[8])*2;
+	summ+= parseInt(RRN_str[9])*3;
+	summ+=parseInt(RRN_str[10])*4;
+	summ+=parseInt(RRN_str[11])*5;
+
+	summ %= 11;
+	summ = 11-summ;
+	summ %= 10;
+
+	alert("마지막 자리: "+RRN_str[12]+"\n"+"검산 결과: "+summ+"\n"+"유효성: "+((RRN_str[12]==summ)?"TRUE":"FALSE"));
+}
+
+function init()
+{
+	var RRN_btn = document.getElementById("RRN_btn");
+	RRN_btn.onclick = validateRRN;
+}
+
+window.onload = init;
+//]]>
+</script>
+</head>
+
+<body>
+<div id="container">
+	<fieldset>
+		<legend>Registered Residence Number(RRN) Checker</legend>
+		<p id="RRN">
+			<input type="text" id="RRN_A" maxlength="6" /><span id="RRN_dash"> - </span><input type="password" id="RRN_B" maxlength="7" />
+		</p>
+		<p>
+			<input type="button" id="RRN_btn" value="Validate" />
+		</p>
+	</fieldset>
+</div>
+</body>
+</html>
